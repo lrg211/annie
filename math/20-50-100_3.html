@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="GBK">
+<title>数学题</title>
+	<script type="text/javascript">
+		function getOptions() {
+		  var x1=document.getElementById("mySelect1");
+		  var x2=document.getElementById("mySelect2");
+		  var index1 = x1.selectedIndex;
+		  var index2 = x2.selectedIndex;
+		  var text1 = x1.options[index1].text;
+		  var text2 = x2.options[index2].text;
+		  var col = 4, row = Math.floor((text2)/col + 1);
+		  var main = document.getElementById("main");
+  		  main.innerHTML = getContent(text1, text2, col, row);
+		  }
+		  
+		  function getRandomNum(Min,Max){  
+  				var Range = Max - Min;  
+  				var Rand = Math.random();  
+  				return(Min + Math.round(Rand * Range));  
+		 }  
+		 function getContent(text1, text2, col, row) {
+		 	var content0 = "<b>" + text1 + "以内的加减</b></br></br>";
+		 	var content = "";
+		 	var s = 0;
+		 	for(var i = 0; i < row; i++) {
+		 		for(var j = 0; j < col; j++) {
+		 			s++; 
+		 			if(s>text2)break;
+					var a1 = getRandomNum(0,text1);
+					var a2 = getRandomNum(0,text1);
+					var a3 = a1+a2;
+					if((i==1 ||i==3) && a1 > a2)
+						content = content + ( "(" + s + ") " + a1 + "     -     " + a2 + "     =     " + "_____");
+					else if(a3<text1){
+						content = content + ( "(" + s + ") " + a1 + "     +     " + a2 + "     =     " + "_____");
+						}
+					else {
+						if(a1 > a2)
+							content = content + ( "(" + s + ") " + a1 + "     -     " + "_____" + "     =     " + a2);
+						else 
+							content = content + ( "(" + s + ") " + "_____" + "     +     " + a1 + "     =     " + a2);
+				}
+			//	if((s+"").length == 1)content = content + ("&nbsp;");
+			//	if((s+"").length == 2)content = content + ("&nbsp;&nbsp;");
+			//	if((a1+"").length == 1)content = content + ("&nbsp;");
+			//	if((a1+"").length == 2)content = content + ("&nbsp;&nbsp;");
+			//	if((a2+"").length == 1)content = content + ("&nbsp;");
+			//	if((a2+"").length == 2)content = content + ("&nbsp;&nbsp;");
+				for(var n = 0; n < 5; n++)
+					content = content + ("&nbsp;");
+		 		}
+		 		content = content + "</br></br>";
+		 	}
+		 	return content0 + content;
+		 }
+	</script>
+</head>
+<body
+<div id="menu">
+	<p>
+	<form>出
+		<select id="mySelect1">
+		  <option>-</option>
+		  <option>10</option>
+		  <option>20</option>
+		  <option>50</option>
+		  <option>100</option>
+		</select> 内的加减，共
+		<select id="mySelect2" onchange="getOptions()">
+		  <option>-</option>
+		  <option>30</option>
+		  <option>50</option>
+		  <option>100</option>
+		</select> 道题目&nbsp;&nbsp;&nbsp;&nbsp;
+		<script>
+			var myDate=new Date();var printDate = myDate.toUTCString();
+			document.write(printDate); for(var n = 0; n < 15; n++)document.write("&nbsp;");
+		</script>
+	</form>
+		<br /><br />
+	</p>
+</div>
+<div id="main">
+</div>
+</body>
+</html>
